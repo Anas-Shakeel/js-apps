@@ -6,6 +6,7 @@
     --clr-accent: #e09a20;
     --clr-primary: #141414;
 
+    --fs-xs: 0.8em;
     --fs-small: 1em;
     --fs-normal: 1.25em;
     --fs-large: 1.625em;
@@ -94,8 +95,8 @@ a {
 }
 
 body {
-    min-width: 100vw;
-    min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
 
     font-size: var(--fs-normal);
     font-weight: var(--fw-bold);
@@ -110,17 +111,12 @@ main {
 }
 
 .header,
-.main-content {
-    border: var(--border-width) solid var(--clr-accent);
-}
-
-.header,
 .footer {
     padding: 0 20px;
 }
 
 .header {
-    min-height: 70px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -141,19 +137,16 @@ main {
     font-size: var(--fs-small);
 }
 
-.main-content {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    background-color: #141414;
-}
-
 .apps-container {
-    height: 75%;
+    height: 70%;
+    max-height: 70%;
     padding: 16px 20px;
+    border: var(--border-width) solid var(--clr-accent);
 }
 
 .apps {
+    height: 91%;
+    max-height: 91%;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -177,10 +170,8 @@ main {
 .description-container {
     height: 25%;
     padding: 16px 20px;
-    border-top: var(--border-width) solid var(--clr-accent);
-}
-
-.description-text {
+    border: var(--border-width) solid var(--clr-accent);
+    border-top: none;
 }
 
 .footer {
@@ -203,4 +194,65 @@ main {
 
 .custom-scrollbar::-webkit-scrollbar-track {
     border: var(--border-width) solid var(--clr-accent);
+}
+
+/* Media Queries */
+
+@media (max-width: 560px) {
+    .header {
+        justify-content: center;
+    }
+    .datetime {
+        display: none;
+    }
+    .section-title {
+        font-size: var(--fs-large);
+        text-align: center;
+    }
+
+    .app-row {
+        flex-direction: column;
+        align-items: normal;
+    }
+    .app-row-name {
+        font-size: var(--fs-normal);
+    }
+
+    .app-row-datetime {
+        font-size: var(--fs-xs);
+    }
+
+    .description-container {
+        height: 40%;
+    }
+    .description-text {
+        font-size: var(--fs-normal);
+    }
+}
+
+@media (max-width: 375px) {
+    .section-title {
+        font-size: var(--fs-normal);
+    }
+
+    .app-row {
+        flex-direction: column;
+        align-items: normal;
+        padding: 0 10px;
+    }
+
+    .app-row-name {
+        font-size: var(--fs-normal);
+    }
+
+    .app-row-datetime {
+        font-size: var(--fs-xs);
+    }
+
+    .description-container {
+        height: 40%;
+    }
+    .description-text {
+        font-size: var(--fs-xs);
+    }
 }
