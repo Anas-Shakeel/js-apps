@@ -57,21 +57,6 @@ body {
     height: 100%;
 }
 
-body {
-    line-height: 1.5;
-}
-
-/* Set shorter line heights on headings and interactive elements */
-h1,
-h2,
-h3,
-h4,
-button,
-input,
-label {
-    line-height: 1.1;
-}
-
 /* Balance text wrapping on headings */
 h1,
 h2,
@@ -93,12 +78,21 @@ textarea:not([rows]) {
     min-height: 10em;
 }
 
-/* Anything that has been anchored to should have extra scroll margin */
-:target {
-    scroll-margin-block: 5ex;
+/* App Styling */
+.section-title {
+    display: inline-block;
+    width: fit-content;
+    padding: 0 30px;
+    margin-bottom: 10px;
+    background-color: var(--clr-accent);
+    color: var(--clr-primary);
 }
 
-/* App Styling */
+a {
+    text-decoration: none;
+    color: var(--clr-accent);
+}
+
 body {
     min-width: 100vw;
     min-height: 100vh;
@@ -109,44 +103,31 @@ body {
     color: var(--clr-accent);
 }
 
-a {
-    text-decoration: none;
-    color: var(--clr-accent);
-}
-
 main {
-    display: grid;
-    grid-template-rows: 1fr 4fr 60px;
-    grid-row: 1fr;
-}
-
-.section-title {
-    padding: 0 30px;
-    display: inline;
-    background-color: var(--clr-accent);
-    color: var(--clr-primary);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .header,
-.main-content,
-.footer {
+.main-content {
     border: var(--border-width) solid var(--clr-accent);
 }
 
 .header,
-.apps-container,
 .footer {
-    padding: 0 30px;
+    padding: 0 20px;
 }
 
 .header {
+    min-height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* color: var(--clr-primary); */
-    /* background-color: var(--clr-accent); */
-
     font-weight: var(--fw-bold);
+
+    background-color: var(--clr-accent);
+    color: var(--clr-primary);
 }
 
 .app-logo {
@@ -161,44 +142,45 @@ main {
 }
 
 .main-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #141414;
 }
 
 .apps-container {
-    overflow-y: auto;
+    height: 75%;
     padding: 16px 20px;
+}
+
+.apps {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
 }
 
 .app-row {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     padding: 0 30px;
     cursor: pointer;
 }
 
+.app-row-active,
 .app-row:hover {
     background-color: var(--clr-accent);
     color: var(--clr-primary);
 }
 
-.app-row-active {
-    background-color: var(--clr-accent);
-    color: var(--clr-primary);
-}
-
 .description-container {
-    padding: 10px 20px;
+    height: 25%;
+    padding: 16px 20px;
     border-top: var(--border-width) solid var(--clr-accent);
 }
 
-.description-container h2 {
-    padding: 0 30px;
-    display: inline;
-    background-color: var(--clr-accent);
-    color: var(--clr-primary);
-}
 .description-text {
-    margin-top: 6px;
 }
 
 .footer {
