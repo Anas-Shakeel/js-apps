@@ -1,10 +1,15 @@
 :root {
     /* Light Mode */
-    /* --clr-accent: #000000;
-    --clr-primary: #afae61; */
+    /* --accent: #000; */
+    /* --primary: #c4ca6c; */
 
-    --clr-accent: #e09a20;
-    --clr-primary: #141414;
+    /* Dark Mode */
+    --accent: #e09a20;
+    --primary: #141414;
+
+    --clr-accent: var(--accent);
+    --clr-primary: var(--primary);
+    --clr-border: var(--accent);
 
     --fs-xs: 0.8em;
     --fs-small: 1em;
@@ -141,7 +146,7 @@ main {
     height: 70%;
     max-height: 70%;
     padding: 16px 20px;
-    border: var(--border-width) solid var(--clr-accent);
+    border: var(--border-width) solid var(--clr-border);
 }
 
 .apps {
@@ -157,7 +162,7 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 30px;
+    padding: 6px 30px;
     cursor: pointer;
 }
 
@@ -170,7 +175,7 @@ main {
 .description-container {
     height: 25%;
     padding: 16px 20px;
-    border: var(--border-width) solid var(--clr-accent);
+    border: var(--border-width) solid var(--clr-border);
     border-top: none;
 }
 
@@ -193,7 +198,7 @@ main {
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-    border: var(--border-width) solid var(--clr-accent);
+    border: var(--border-width) solid var(--clr-border);
 }
 
 /* Media Queries */
