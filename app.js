@@ -109,7 +109,8 @@ function update_description(desc) {
 // Updates apps title
 function update_apps_title() {
     const apps_title = document.getElementById("appsTitle");
-    apps_title.innerHTML = `${apps_title.innerHTML} (${APPS.length})`;
+    let total_apps = APPS ? ` (${APPS.length})` : "";
+    apps_title.innerHTML = `${apps_title.innerHTML}${total_apps}`;
 }
 
 // Updates datetime in the header
