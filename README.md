@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Anas-Shakeel/js-projects/refs/heads/main/static/assets/preview.png" alt="preview"/>
+  <img src="https://raw.githubusercontent.com/Anas-Shakeel/js-apps/refs/heads/main/assets/preview.png" alt="preview"/>
 </p>
 
 # JS Projects
