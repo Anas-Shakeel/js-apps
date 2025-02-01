@@ -99,8 +99,19 @@ APPS.sort((a, b) => a.name.localeCompare(b.name));
 // Currently selected app Element
 let SelectedAppElement = null;
 
+// Current Theme of app
+// let ThemeMode = "dark"; // Default
+let local_theme = localStorage.getItem("ThemeMode");
+let ThemeMode = local_theme ? local_theme : "dark"; // Default
+
 // Main Program
 document.addEventListener("DOMContentLoaded", () => {
+    // Load App Theme
+    loadTheme();
+
+    // Toggle Theme on Keypress [H]
+    document.addEventListener("keypress", toggle_theme);
+
     // Apps container
     const apps_container = document.getElementById("apps");
     apps_container.innerHTML = "";
@@ -211,4 +222,42 @@ function open_app(event) {
     // Target Element
     let target = event.target.tagName === "A" ? event.target : event.target.parentElement;
     window.open(getAppByID(parseInt(target.id)).url, "_blank");
+}
+
+// Change a CSS variable
+function changeCSSVariable(var_name, value) {
+    document.documentElement.style.setProperty(var_name, value);
+}
+
+function toggle_theme(event) {
+    if (event.key.toLowerCase() !== "h") {
+        return;
+    }
+
+    if (ThemeMode == "dark") {
+        // Set to Light Mode
+        changeCSSVariable("--accent", "#000");
+        changeCSSVariable("--primary", "#c4ca6c");
+        ThemeMode = "light";
+    } else {
+        // Set to Dark Mode
+        changeCSSVariable("--accent", "#e09a20");
+        changeCSSVariable("--primary", "#141414");
+        ThemeMode = "dark";
+    }
+
+    // Save theme info in local storage (browser)
+    localStorage.setItem("ThemeMode", ThemeMode);
+}
+
+function loadTheme() {
+    if (ThemeMode == "dark") {
+        // Set to Dark Mode
+        changeCSSVariable("--accent", "#e09a20");
+        changeCSSVariable("--primary", "#141414");
+    } else {
+        // Set to Light Mode
+        changeCSSVariable("--accent", "#000");
+        changeCSSVariable("--primary", "#c4ca6c");
+    }
 }
