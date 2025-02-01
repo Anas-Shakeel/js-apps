@@ -1,27 +1,20 @@
 // All apps and their data
-// const APPS = loadApps().then(data => );
-let APPS = null;
-
-loadApps().then((data) => {
-    APPS = data;
-});
-
-async function loadApps() {
-    try {
-        const response = await fetch("apps.json");
-
-        if (!response.ok) {
-            console.error("Error fetching JSON:", response.statusText);
-            return null;
-        }
-
-        const data = await response.json();
-        return Object.keys(data).length ? data : null;
-    } catch (error) {
-        console.error("Error loading JSON:", error);
-        return null;
-    }
-}
+const APPS = [
+    {
+        id: 1,
+        name: "Binary Effect",
+        url: "apps/binary-effect/index.html",
+        datetime: "01-MAY-2024 01:46 am",
+        description: "A simple matrix-like effect where bits change randomly to 0 or 1.",
+    },
+    {
+        id: 2,
+        name: "BMI Calculator",
+        url: "apps/binary-effect/index.html",
+        datetime: "17-APR-2024 02:21 pm",
+        description: "A simple app that calculates BMI (Body Mass Index) by taking height and weight.",
+    },
+];
 
 // Currently selected app Element
 let SelectedAppElement = null;
