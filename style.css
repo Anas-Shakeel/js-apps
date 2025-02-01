@@ -180,10 +180,10 @@ main {
 }
 
 .footer {
+    display: flex;
+    justify-content: space-evenly;
     background-color: var(--clr-accent);
     color: var(--clr-primary);
-    display: flex;
-    justify-content: center;
 }
 
 /* ? Custom Scollbar */
@@ -205,6 +205,11 @@ main {
 
 /* Media Queries */
 
+@media (max-width: 860px) {
+    .footer {
+        font-size: var(--fs-xs);
+    }
+}
 @media (max-width: 560px) {
     .header {
         justify-content: center;
@@ -234,6 +239,10 @@ main {
     }
     .description-text {
         font-size: var(--fs-normal);
+    }
+
+    .footer {
+        display: none;
     }
 }
 
