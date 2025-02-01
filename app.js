@@ -131,6 +131,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Click Event
     apps_container.addEventListener("click", select_app);
 
+    // Touch Event
+    document.addEventListener("touchend", open_app);
+
     // Double-Click Event
     apps_container.addEventListener("dblclick", open_app);
 });
