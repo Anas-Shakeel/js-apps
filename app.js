@@ -1,22 +1,27 @@
 // All apps and their data
-const APPS = [
-    {
-        id: 1,
-        active: false,
-        name: "Binary Effect",
-        url: "apps/binary-effect/index.html",
-        datetime: "01-MAY-2024 01:46 am",
-        description: "A simple matrix-like effect where bits change randomly to 0 or 1.",
-    },
-    {
-        id: 2,
-        active: false,
-        name: "BMI Calculator",
-        url: "apps/binary-effect/index.html",
-        datetime: "17-APR-2024 02:21 pm",
-        description: "A simple app that calculates BMI (Body Mass Index) by taking height and weight.",
-    },
-];
+// const APPS = loadApps().then(data => );
+let APPS = null;
+
+loadApps().then((data) => {
+    APPS = data;
+});
+
+async function loadApps() {
+    try {
+        const response = await fetch("apps.json");
+
+        if (!response.ok) {
+            console.error("Error fetching JSON:", response.statusText);
+            return null;
+        }
+
+        const data = await response.json();
+        return Object.keys(data).length ? data : null;
+    } catch (error) {
+        console.error("Error loading JSON:", error);
+        return null;
+    }
+}
 
 // Currently selected app Element
 let SelectedAppElement = null;
@@ -30,26 +35,20 @@ document.addEventListener("DOMContentLoaded", () => {
     update_datetime();
     update_apps_title();
 
+    if (!APPS) {
+        return;
+    }
+
     // Add all APPS in apps_container
     APPS.forEach((app) => {
-        apps_container.innerHTML += create_app_row(app);
+        apps_container.innerHTML += create_app_row(app, false);
     });
-
-    // Update description
-    update_description(APPS[0].description);
 
     // Click Event
     apps_container.addEventListener("click", select_app);
 
     // Double-Click Event
-    apps_container.addEventListener("dblclick", (event) => {
-        let target = event.target;
-        if (target.className.startsWith("app-row")) {
-            let target_id = target.tagName === "A" ? target.id : target.parentElement.id;
-            let target_app = getAppByID(parseInt(target_id));
-            window.open(target_app.url, "_blank");
-        }
-    });
+    apps_container.addEventListener("dblclick", open_app);
 });
 
 // Get App by ID
@@ -127,4 +126,15 @@ function update_datetime() {
         let datetime = new Date();
         datetime_container.innerHTML = mediumTime.format(datetime.getTime());
     }, 1000);
+}
+
+// Opens an app in a new tab/window
+function open_app(event) {
+    if (!event.target.className.startsWith("app-row")) {
+        return;
+    }
+
+    // Target Element
+    let target = event.target.tagName === "A" ? event.target : event.target.parentElement;
+    window.open(getAppByID(parseInt(target.id)).url, "_blank");
 }
