@@ -182,6 +182,8 @@ main {
 .footer {
     background-color: var(--clr-accent);
     color: var(--clr-primary);
+    display: flex;
+    justify-content: center;
 }
 
 /* ? Custom Scollbar */
