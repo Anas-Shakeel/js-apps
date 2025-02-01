@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Load App Theme
     loadTheme();
 
-    // Toggle Theme on Keypress [H]
+    // Toggle Theme on Keypress [T]
     document.addEventListener("keypress", toggle_theme);
 
     // Apps container
@@ -233,7 +233,7 @@ function changeCSSVariable(var_name, value) {
 }
 
 function toggle_theme(event) {
-    if (event.key.toLowerCase() !== "h") {
+    if (event.key.toLowerCase() !== "t") {
         return;
     }
 
