@@ -39,7 +39,7 @@
     padding: 0;
     font: inherit;
     /* font-family: "Courier New", Courier, monospace; */
-    font-family: "Ubuntu Mono", "Cascadia Mono";
+    font-family: "Ubuntu Mono", "Cascadia Mono", "Courier New", Courier, monospace;
 }
 
 /* Remove default margin in favour of better control in authored CSS */
@@ -120,7 +120,6 @@ body {
     border-bottom-color: transparent;
 
     user-select: none;
-    /* border-bottom: 1px solid var(--clr-border); */
 }
 
 .titlebar-title-container {
@@ -146,9 +145,6 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-
-    /* border: var(--border-width) solid transparent;
-    border-left-color: var(--clr-border); */
 }
 
 .terminal-btn-close:hover {
@@ -168,9 +164,8 @@ body {
 .terminal-screen {
     height: 100%;
     padding: 10px 20px;
-    border: var(--border-width) solid var(--clr-border);
-
     overflow-y: auto;
+    border: var(--border-width) solid var(--clr-border);
 }
 
 .terminal-text-container {
@@ -178,11 +173,12 @@ body {
     flex-direction: column;
     min-height: 100%;
     line-height: 1.25em;
-
     cursor: text;
 }
 
 .terminal-line {
+    display: flex;
+    gap: 6px;
     width: 100%;
     min-height: 20px;
 }
@@ -193,6 +189,7 @@ body {
     color: var(--clr-accent);
     outline: none;
     border: none;
+    flex-grow: 1;
 }
 
 /* ? Custom Scollbar */
