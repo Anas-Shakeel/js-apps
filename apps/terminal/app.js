@@ -50,6 +50,13 @@ example: color #04a03d black
         function: terminal_hello,
         args_accepted: 1,
     },
+    title: {
+        name: "title",
+        description: "Displays or changes the title of Terminal.",
+        usage: "TITLE [text]",
+        function: terminal_title,
+        args_accepted: 1,
+    },
     time: {
         name: "time",
         description: "Displays the time.",
@@ -276,6 +283,20 @@ function terminal_time() {
 function terminal_date() {
     let datetime = new Date();
     return `Current date is: ${dateFormat.format(datetime.getTime())}`;
+}
+
+function terminal_title(args) {
+    // Get the title element
+    let title_element = document.querySelector(".terminal-title");
+
+    // No Args?
+    if (args.length === 0) {
+        // Show title
+        return title_element.innerText;
+    }
+
+    // Change title
+    title_element.innerText = args[0];
 }
 
 // Helper Functions
