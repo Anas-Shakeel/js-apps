@@ -43,6 +43,13 @@ example: color #04a03d black
         function: terminal_clear,
         args_accepted: 0,
     },
+    echo: {
+        name: "echo",
+        description: "Displays message.",
+        usage: "ECHO [message]",
+        function: terminal_echo,
+        args_accepted: 1,
+    },
     hello: {
         name: "hello",
         description: "Prints hello",
@@ -311,6 +318,10 @@ function terminal_title(args) {
 
     // Change title
     title_element.innerText = args[0];
+}
+
+function terminal_echo(args) {
+    return args.length ? args[0] : "'echo' expects a message.";
 }
 
 // Helper Functions
