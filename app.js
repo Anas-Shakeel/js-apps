@@ -1,6 +1,13 @@
 // All apps and their data
 const APPS = [
     {
+        id: 13,
+        name: "terminal",
+        url: "apps/terminal/index.html",
+        datetime: "03-FEB-2025 12:07 am",
+        description: "Just a simple (USELESS but COOL) terminal in the web.",
+    },
+    {
         id: 1,
         name: "Binary Effect",
         url: "apps/binary-effect/index.html",
@@ -8,18 +15,39 @@ const APPS = [
         description: "A simple matrix-like effect where bits change randomly to 0 or 1.",
     },
     {
-        id: 2,
-        name: "BMI Calculator",
-        url: "apps/bmi-calculator/index.html",
-        datetime: "17-APR-2024 02:21 pm",
-        description: "A simple app that calculates BMI (Body Mass Index) by taking height and weight.",
+        id: 11,
+        name: "hover effect",
+        url: "apps/hover-effect/index.html",
+        datetime: "30-APR-2024 11:10 pm",
+        description: "An effect inspired by '4kwallpapers.com' where text changes color on hover.",
     },
     {
-        id: 3,
-        name: "Bricks App",
-        url: "apps/bricks/index.html",
-        datetime: "11-APR-2024 09:25 pm",
-        description: "A simple app made for fun, just a practice project.",
+        id: 7,
+        name: "Color Palettes",
+        url: "apps/color-palettes/index.html",
+        datetime: "29-APR-2024 01:25 am",
+        description: "A simple app that generates random color palettes.",
+    },
+    {
+        id: 10,
+        name: "hacker effect",
+        url: "apps/hacker-effect/index.html",
+        datetime: "27-APR-2024 10:34 pm",
+        description: "A effect inspired by 'HYPERPLEXED' on youtube.",
+    },
+    {
+        id: 6,
+        name: "Color Generator",
+        url: "apps/color-generator/index.html",
+        datetime: "27-APR-2024 03:31 pm",
+        description: "A simple app that lets users generate a bunch of colors.",
+    },
+    {
+        id: 9,
+        name: "Guess a Number",
+        url: "apps/guess-number/index.html",
+        datetime: "21-APR-2024 05:08 pm",
+        description: "A simple game that lets you guess a number between 1 and 100 in 10 guesses.",
     },
     {
         id: 4,
@@ -29,61 +57,26 @@ const APPS = [
         description: "A simple digital clock made using HTML,CSS,JS. It displays local time and date.",
     },
     {
+        id: 2,
+        name: "BMI Calculator",
+        url: "apps/bmi-calculator/index.html",
+        datetime: "17-APR-2024 02:21 pm",
+        description: "A simple app that calculates BMI (Body Mass Index) by taking height and weight.",
+    },
+    {
         id: 5,
         name: "Color Changer",
         url: "apps/color-changer/index.html",
         datetime: "17-APR-2024 12:20 pm",
         description: "A simple color changer app that changes the background color upon a color click.",
     },
-
     {
-        id: 6,
-        name: "Color Generator",
-        url: "apps/color-generator/index.html",
-        datetime: "27-APR-2024 03:31 pm",
-        description: "A simple app that lets users generate a bunch of colors.",
+        id: 3,
+        name: "Bricks App",
+        url: "apps/bricks/index.html",
+        datetime: "11-APR-2024 09:25 pm",
+        description: "A simple app made for fun, just a practice project.",
     },
-
-    {
-        id: 7,
-        name: "Color Palettes",
-        url: "apps/color-palettes/index.html",
-        datetime: "29-APR-2024 01:25 am",
-        description: "A simple app that generates random color palettes.",
-    },
-
-    {
-        id: 8,
-        name: "Garbage App",
-        url: "apps/garbage-app/index.html",
-        datetime: "03-APR-2024 11:22 pm",
-        description: "A garbage app made to practice basic javascript.",
-    },
-
-    {
-        id: 9,
-        name: "Guess a Number",
-        url: "apps/guess-number/index.html",
-        datetime: "21-APR-2024 05:08 pm",
-        description: "A simple game that lets you guess a number between 1 and 100 in 10 guesses.",
-    },
-
-    {
-        id: 10,
-        name: "hacker effect",
-        url: "apps/hacker-effect/index.html",
-        datetime: "27-APR-2024 10:34 pm",
-        description: "A effect inspired by 'HYPERPLEXED' on youtube.",
-    },
-
-    {
-        id: 11,
-        name: "hover effect",
-        url: "apps/hover-effect/index.html",
-        datetime: "30-APR-2024 11:10 pm",
-        description: "An effect inspired by '4kwallpapers.com' where text changes color on hover.",
-    },
-
     {
         id: 12,
         name: "pyramid",
@@ -91,18 +84,17 @@ const APPS = [
         datetime: "08-APR-2024 02:37 pm",
         description: "A simple app that creates the `n` pyramids.",
     },
-
     {
-        id: 13,
-        name: "terminal",
-        url: "apps/terminal/index.html",
-        datetime: "03-FEB-2025 12:07 am",
-        description: "Just a simple (USELESS but COOL) terminal in the web.",
+        id: 8,
+        name: "Garbage App",
+        url: "apps/garbage-app/index.html",
+        datetime: "03-APR-2024 11:22 pm",
+        description: "A garbage app made to practice basic javascript.",
     },
 ];
 
 // Auto Sort the APPS
-APPS.sort((a, b) => a.name.localeCompare(b.name));
+// APPS.sort((a, b) => a.name.localeCompare(b.name));
 
 // Currently selected app Element
 let SelectedAppElement = null;
@@ -165,7 +157,7 @@ function create_app_row(app, mark_active) {
     let active_class = mark_active ? "app-row-active" : "";
 
     return `<a href="#" class="app-row ${active_class}" id="${app.id}">
-    <span class="app-row-name">${app.name}</span>
+    <span class="app-row-name">${toTitle(app.name)}</span>
     <span class="app-row-datetime">${app.datetime}</span>
     </a>`;
 }
@@ -232,6 +224,14 @@ function open_app(event) {
     // Target Element
     let target = event.target.tagName === "A" ? event.target : event.target.parentElement;
     window.open(getAppByID(parseInt(target.id)).url, "_blank");
+}
+
+// Converts text into titlecase
+function toTitle(text) {
+    return text
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(" ");
 }
 
 // Change a CSS variable
