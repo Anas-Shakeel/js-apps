@@ -325,6 +325,10 @@ function terminal_time() {
 }
 
 function terminal_date() {
+    const dateFormat = new Intl.DateTimeFormat("en-US", {
+        dateStyle: "full",
+    });
+
     let datetime = new Date();
     return `Current date is: ${dateFormat.format(datetime.getTime())}`;
 }
