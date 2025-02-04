@@ -211,7 +211,8 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-    background-color: var(--clr-primary-light);
+    /* background-color: var(--clr-primary-light); */
+    /* border: var(--border-width) solid var(--clr-accent); */
 }
 
 /* User Selection */
