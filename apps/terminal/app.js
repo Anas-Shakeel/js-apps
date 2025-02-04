@@ -14,7 +14,7 @@ let THEME_BG = localStorage.getItem("THEME_BG");
 loadTheme();
 
 // Available Commands
-const COMMANDS = {
+let COMMANDS = {
     help: {
         name: "help",
         description: "Provides help information for commands.",
@@ -93,6 +93,12 @@ example: color #04a03d black
         args_accepted: 0,
     },
 };
+
+COMMANDS = Object.fromEntries(
+    Object.entries(COMMANDS).sort(([keyA], [keyB]) => {
+        return keyA.localeCompare(keyB);
+    })
+);
 
 // Terminal Standard Input/Output
 let TERMINAL = null;
