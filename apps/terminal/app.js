@@ -57,6 +57,13 @@ example: color #04a03d black
         function: terminal_hello,
         args_accepted: 1,
     },
+    prompt: {
+        name: "prompt",
+        description: "Changes the prompt symbol of Terminal.",
+        usage: "PROMPT [text]",
+        function: terminal_prompt,
+        args_accepted: 1,
+    },
     title: {
         name: "title",
         description: "Displays or changes the title of Terminal.",
@@ -82,6 +89,9 @@ example: color #04a03d black
 
 // Terminal Standard Input/Output
 let TERMINAL = null;
+
+// Terminal's prompt symbol
+let PromptSymbol = "~$";
 
 // User's Input history
 let InputHistory = [];
@@ -160,7 +170,7 @@ function spawn_prompt() {
 
     // Create Symbol
     let symbol = document.createElement("span");
-    symbol.textContent = "~$ ";
+    symbol.textContent = `${PromptSymbol} `;
 
     // Create new input (PROMPT)
     let new_input = document.createElement("span");
@@ -322,6 +332,14 @@ function terminal_title(args) {
 
 function terminal_echo(args) {
     return args.length ? args[0] : "'echo' expects a message.";
+}
+
+function terminal_prompt(args) {
+    if (!args.length) {
+        return "'prompt' expects text (prompt symbol).";
+    }
+
+    PromptSymbol = args[0];
 }
 
 // Helper Functions
