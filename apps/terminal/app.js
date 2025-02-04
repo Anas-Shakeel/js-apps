@@ -50,6 +50,13 @@ example: color #04a03d black
         function: terminal_hello,
         args_accepted: 1,
     },
+    time: {
+        name: "time",
+        description: "Displays the local time.",
+        usage: "TIME",
+        function: terminal_time,
+        args_accepted: 0,
+    },
 };
 
 // Terminal Standard Input/Output
@@ -115,7 +122,7 @@ function exitTerminal() {
 
 // Print text onto the TERMINAL
 function print_line(text = "") {
-    text = text.trim();
+    text = text.toString().trim();
     if (!text) return;
 
     // Print each line separately
@@ -248,6 +255,11 @@ function terminal_color(args) {
 
     localStorage.setItem("THEME_FG", getCSSVariable("--accent"));
     localStorage.setItem("THEME_BG", getCSSVariable("--primary"));
+}
+
+function terminal_time() {
+    let datetime = new Date();
+    return `Current local time is: ${datetime.toLocaleTimeString()}`;
 }
 
 // Helper Functions
