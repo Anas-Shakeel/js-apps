@@ -78,6 +78,13 @@ example: color #04a03d black
         function: terminal_time,
         args_accepted: 0,
     },
+    version: {
+        name: "version",
+        description: "Displays the Terminal version.",
+        usage: "VERSION",
+        function: terminal_version,
+        args_accepted: 0,
+    },
     date: {
         name: "date",
         description: "Displays the date.",
@@ -340,6 +347,10 @@ function terminal_prompt(args) {
     }
 
     PromptSymbol = args[0];
+}
+
+function terminal_version() {
+    return `${APP_NAME} [Version ${APP_VERSION}]`;
 }
 
 // Helper Functions
