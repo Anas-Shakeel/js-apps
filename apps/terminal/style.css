@@ -188,7 +188,7 @@ body {
 }
 
 .terminal-line-input {
-    min-width: 94%;
+    min-width: 100px;
     background-color: var(--clr-primary);
     color: var(--clr-accent);
     outline: none;
