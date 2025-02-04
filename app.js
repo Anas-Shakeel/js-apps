@@ -91,6 +91,14 @@ const APPS = [
         datetime: "08-APR-2024 02:37 pm",
         description: "A simple app that creates the `n` pyramids.",
     },
+
+    {
+        id: 13,
+        name: "terminal",
+        url: "apps/terminal/index.html",
+        datetime: "03-FEB-2025 12:07 am",
+        description: "Just a simple (USELESS but COOL) terminal in the web.",
+    },
 ];
 
 // Auto Sort the APPS
@@ -100,7 +108,6 @@ APPS.sort((a, b) => a.name.localeCompare(b.name));
 let SelectedAppElement = null;
 
 // Current Theme of app
-// let ThemeMode = "dark"; // Default
 let local_theme = localStorage.getItem("ThemeMode");
 let ThemeMode = local_theme ? local_theme : "dark"; // Default
 
