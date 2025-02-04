@@ -55,6 +55,11 @@ example: color #04a03d black
 // Terminal Standard Input/Output
 let TERMINAL = null;
 
+// User's Input history
+let InputHistory = [];
+let historyIndex = -1;
+const MAX_HISTORY = 80; // maximum stored commands
+
 // Main Entry Point
 document.addEventListener("DOMContentLoaded", () => {
     TERMINAL = document.getElementById("stdout");
@@ -65,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Get input on each Enter keypress
-    TERMINAL.addEventListener("keypress", (event) => {
+    TERMINAL.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
             event.preventDefault();
 
@@ -80,8 +85,25 @@ document.addEventListener("DOMContentLoaded", () => {
             // Process and execute the command
             process_command(command);
 
+            // Add command to history
+            pushToInputHistory(command);
+
             // Spawn a Prompt for user to type commands
             spawn_prompt();
+        } else if (event.key === "ArrowUp") {
+            if (historyIndex > 0) {
+                historyIndex--;
+                event.target.innerText = InputHistory[historyIndex];
+            }
+            event.preventDefault();
+        } else if (event.key === "ArrowDown") {
+            if (historyIndex < InputHistory.length - 1) {
+                historyIndex++;
+                event.target.innerText = InputHistory[historyIndex];
+            } else {
+                // Clear the prompot
+                event.target.innerText = "";
+            }
         }
     });
 });
@@ -260,4 +282,15 @@ function loadTheme() {
     // Set to Dark Mode
     changeCSSVariable("--accent", THEME_FG);
     changeCSSVariable("--primary", THEME_BG);
+}
+
+// Pushes an item to inputHistory
+function pushToInputHistory(item) {
+    if (InputHistory.length >= MAX_HISTORY) {
+        // Remove one from start and add one to the end
+        InputHistory.shift();
+    }
+
+    InputHistory.push(item);
+    historyIndex = InputHistory.length;
 }
