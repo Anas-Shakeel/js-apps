@@ -183,6 +183,10 @@ body {
     min-height: 20px;
 }
 
+.terminal-line pre {
+    text-wrap: wrap;
+}
+
 .terminal-line-input {
     min-width: 94%;
     background-color: var(--clr-primary);
