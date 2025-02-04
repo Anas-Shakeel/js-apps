@@ -175,13 +175,27 @@ function remove_extra_spaces(text) {
         .join(" ");
 }
 
+// Parses the command
+function parse_command(command) {
+    let regex = /[^\s"]+|"([^"]*)"/g;
+    let matches = [];
+
+    let match;
+    while ((match = regex.exec(command)) !== null) {
+        // Push match without quotes (if there were any)
+        matches.push(match[1] ? match[1] : match[0]);
+    }
+
+    return matches;
+}
+
 // Processes and executes the prompt
 function process_command(command = "") {
     // Command empty?
     if (!command) return "";
 
-    // Break command into chunks
-    let command_tokens = command.split(" ");
+    // Parse the command
+    let command_tokens = parse_command(command);
     let action = command_tokens[0].toLowerCase(); // Action of the command
     let args = command_tokens.slice(1); // Args for the action
 
