@@ -52,9 +52,16 @@ example: color #04a03d black
     },
     time: {
         name: "time",
-        description: "Displays the local time.",
+        description: "Displays the time.",
         usage: "TIME",
         function: terminal_time,
+        args_accepted: 0,
+    },
+    date: {
+        name: "date",
+        description: "Displays the date.",
+        usage: "DATE",
+        function: terminal_date,
         args_accepted: 0,
     },
 };
@@ -258,8 +265,17 @@ function terminal_color(args) {
 }
 
 function terminal_time() {
+    const timeFormat = new Intl.DateTimeFormat("en-US", {
+        timeStyle: "full",
+    });
+
     let datetime = new Date();
-    return `Current local time is: ${datetime.toLocaleTimeString()}`;
+    return `Current local time is: ${timeFormat.format(datetime.getTime())}`;
+}
+
+function terminal_date() {
+    let datetime = new Date();
+    return `Current date is: ${dateFormat.format(datetime.getTime())}`;
 }
 
 // Helper Functions
