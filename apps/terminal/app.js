@@ -4,8 +4,14 @@ const APP_VERSION = "1.0";
 const APP_DESC =
     "A web-based terminal that executes commands, keeps input history and mimics a real terminal experience.";
 
-// Terminal Standard Input/Output
-let TERMINAL = null;
+// Theme Colors
+let DEFAULT_THEME_FG = getCSSVariable("--accent");
+let DEFAULT_THEME_BG = getCSSVariable("--primary");
+
+let THEME_FG = localStorage.getItem("THEME_FG");
+let THEME_BG = localStorage.getItem("THEME_BG");
+
+loadTheme();
 
 // Available Commands
 const COMMANDS = {
@@ -15,6 +21,20 @@ const COMMANDS = {
         usage: "HELP [command]",
         function: terminal_help,
         args_accepted: 1,
+    },
+    color: {
+        name: "color",
+        description: "Sets the default foreground and background colors.",
+        usage: `COLOR [fgcolor] [bgcolor]
+    fgcolor    Foreground color (web color or hex code)
+    bgcolor    Background color (web color or hex code)
+
+If no color is specified, this command restores the default color of Terminal.
+
+example: color #04a03d black
+`,
+        function: terminal_color,
+        args_accepted: 2,
     },
     clear: {
         name: "clear",
@@ -31,6 +51,9 @@ const COMMANDS = {
         args_accepted: 1,
     },
 };
+
+// Terminal Standard Input/Output
+let TERMINAL = null;
 
 // Main Entry Point
 document.addEventListener("DOMContentLoaded", () => {
@@ -148,13 +171,13 @@ function process_command(command = "") {
 // Command Function Definitions
 function terminal_help(args) {
     // Any Arg?
-    if (args.length) {
+    if (args.length === 1) {
         // Arg valid?
         if (!Object.hasOwn(COMMANDS, args[0])) {
             return `This command '${args[0]}' is not supported by help utility.`;
         }
 
-        return `${COMMANDS[args[0]].description}\nusage: ${COMMANDS[args[0]].usage}\n`;
+        return `${COMMANDS[args[0]].description}\n\nusage: ${COMMANDS[args[0]].usage}\n`;
     }
 
     // Terminal Help
@@ -173,16 +196,36 @@ function terminal_clear() {
 }
 
 function terminal_hello(args) {
-    if (args.length >= 2) {
-        return "'hello' command expects only 1 argument.";
-    }
-
     if (args.length == 1) {
         return `Hello, ${title(args[0])}`;
     }
 
     // Default
     return "Hello, World!";
+}
+
+function terminal_color(args) {
+    // No ARGS?
+    if (args.length === 0) {
+        // Restore color
+        changeCSSVariable("--accent", DEFAULT_THEME_FG);
+        changeCSSVariable("--primary", DEFAULT_THEME_BG);
+    }
+
+    // Has fgcolor?
+    if (args[0] !== undefined) {
+        // Set foreground color
+        changeCSSVariable("--accent", args[0]);
+    }
+
+    // Has bgcolor?
+    if (args[1] != undefined) {
+        // Set Background color
+        changeCSSVariable("--primary", args[1]);
+    }
+
+    localStorage.setItem("THEME_FG", getCSSVariable("--accent"));
+    localStorage.setItem("THEME_BG", getCSSVariable("--primary"));
 }
 
 // Helper Functions
@@ -200,4 +243,21 @@ function title(text) {
 
 function capitalize(text) {
     return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+}
+
+// Change a CSS variable
+function changeCSSVariable(var_name, value) {
+    document.documentElement.style.setProperty(var_name, value);
+}
+
+// Get a CSS variable
+function getCSSVariable(var_name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(var_name);
+}
+
+// Loads the theme
+function loadTheme() {
+    // Set to Dark Mode
+    changeCSSVariable("--accent", THEME_FG);
+    changeCSSVariable("--primary", THEME_BG);
 }
